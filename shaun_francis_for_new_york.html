@@ -1,34 +1,88 @@
-{% include "breadcrumbs" %}
+<!DOCTYPE html>
 
-{% if page.headline.size > 0 %}
-<h2 class="headline">{{ page.headline }}</h2>
-{% endif %}
+<html>
+  <head>
+    
+    <title>Shaun Francis for New York</title>
 
-<div id="content">
+    <meta name="description" content="Shaun Francis is running for New York State Senate">
+    <meta name="keywords" content="shaun francis, new york senate, new york senator, state senate, state senator">
 
-  <div id="intro" class="intro">
-    <div class="text-content">
-      {{ page.basic.content }}
-    </div>
-  </div>
+    <!-- Load Google fonts -->
+    <!-- Load FontAwesome -->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.4.0/css/font-awesome.min.css">
 
-  {% if page.tags_count > 0 %}
-  <div class="page-tags">
-    {% include "page_tags" with page %}
-  </div>
-  {% endif %}
+    <style>
 
-  {% if page.is_homepage? == true and site.page_tags contains "homepage" %}
-    {% tag "homepage" with "homepage_widget" %}
-  {% endif %}
+    body {
+      height: 100%;
+      width: 100%;
+        background: 
+          /* top, transparent blue, faked with gradient */ 
+          linear-gradient(
+            rgba(15, 32, 70, 0.4), 
+            rgba(15, 32, 70, 0.4)
+          ),
+          /* bottom, image */
+          url('http://d3n8a8pro7vhmx.cloudfront.net/themes/53fbd2bb01925b4aec000001/attachments/original/1458783858/SF-splash.jpg?1458783858');
+      background-attachment: fixed;
+      background-position: -250px 0; 
+      background-size: cover;
+      background-repeat: none;
+      margin: 0;
+    }
 
-  <div class="like-page">
-    <strong>Do you like this page?</strong>
-    {% include "like_page" %}
-  </div>
+    header {
+    }
 
-  {% if page.show_stream? %}
-  {% include "page_stream" %}
-  {% endif %}
+    .logo {
+      width: 65%;
+    }
 
-</div>
+    article h1{
+      text-align: center;
+      color: white;
+
+    }
+
+    footer {
+      bottom: 0;
+    }
+
+    /* LARGE SCREENS */
+
+    @media (min-width: 48em) {
+
+      body {
+        background-position: 0 0;
+      }
+
+    }
+    
+
+    </style>
+
+  </head>
+
+  <body>
+  
+    <header>
+
+      <center><img class="logo" src="http://d3n8a8pro7vhmx.cloudfront.net/themes/53fbd2bb01925b4aec000001/attachments/original/1458785191/Colour_transparent_white.png?1458785191"></center>
+
+    </header>
+
+    <article>
+
+      <h1>A new generation</h1>
+      <h1>of leadership in Albany</h1>
+
+    </article>
+
+      <footer>
+
+      </footer>
+
+  </body>
+
+</html>
