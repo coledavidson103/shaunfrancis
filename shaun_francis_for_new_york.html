@@ -7,6 +7,7 @@
 
     <meta name="description" content="Shaun Francis is running for New York State Senate">
     <meta name="keywords" content="shaun francis, new york senate, new york senator, state senate, state senator">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
 
     <!-- Load Google fonts -->
     <link href='https://fonts.googleapis.com/css?family=Lora:400,700' rel='stylesheet' type='text/css'>
@@ -31,9 +32,25 @@
       background-size: cover;
       background-repeat: none;
       margin: 0;
+      font-family: lora, Georgia, Times, serif;
     }
 
     header {
+    }
+
+    .top-bar {
+      background-color: rgb(15,32,70);
+      overflow: hidden;
+    }
+
+    .donate {
+    background-color: #D50113;
+    display: inline-block;
+    padding: 1em;
+    color: white;
+    font-weight: 700;
+    text-decoration: none;
+    float: right;
     }
 
     .logo {
@@ -41,7 +58,7 @@
     }
 
     article {
-      margin-top: 35%;
+      margin-top: 10%;
     }
 
     article h1{
@@ -54,19 +71,78 @@
     h4 {
       text-align: center;
       margin-top: 0;
-      font-family: lora;
+      font-family: lora, Georgia, Times, serif;
       color: rgb(15,32,70);
       font-size: 1.2em;
     }
 
-    .form-wrap {
+    #content {
       background-color: rgba(255,255,255,.5);
-      padding: 1em;
       text-align: center;
+      padding: 1em;
     }
 
     label {
       display: block;
+      font-family: lora, Georgia, Times, serif;
+      color: rgb(15,32,70);
+      padding: .25em;
+      text-transform: uppercase;
+      font-weight: 700;
+    }
+
+    label.checkbox {
+      display: inline;
+    }
+
+    input {
+      height: 3em;
+      width: 17em;
+      font-family: lora, Georgia, Times, serif;
+      font-weight: 700;
+      font-size: 1em;
+      text-align: center;
+    }
+
+    input.submit-button {
+      background-color: rgb(15,32,70);
+      color: white;
+      border: none;
+      margin-top:1em;
+      margin-bottom: 1em;
+    }
+
+    .skip {
+      background-color: rgb(15,32,70);
+      color: white;
+      border: none;
+      /* height: 3em; */
+      /* width: 17em; */
+      text-align: center;
+      padding: 1em;
+      text-decoration: none;
+      font-family: lora, georgia, times, serif;
+      font-weight: 700;
+      display: inline-block;
+    }
+
+    .skip:hover {
+      background-color: #3EADED;
+    }
+
+    input.submit-button:hover {
+      background-color: #3EADED;
+    }
+
+    .authorization {
+      font-family: arial, sans-serif;
+      text-transform: uppercase;
+      padding: .25em 1em;
+      border: white 1px solid;
+      color: white;
+      font-size: .75em;
+      text-align: center;
+      display: inline-block;
     }
 
     .bold {
@@ -75,15 +151,64 @@
     }
 
     footer {
-      bottom: 0;
+    background-color: rgb(15,32,70);
+    position: fixed;
+    bottom: 0;
+    height: 3.25em;
+    z-index: 0;
+    width: 100%;
     }
 
-    /* LARGE SCREENS */
+    .donate {
+    }
 
-    @media (min-width: 48em) {
+    .donate:hover {
+      background-color: #740009;
+    }
+
+    /* MEDIUM SCREENS */
+
+    @media (min-width: 40em) {
+
+    body {
+
+    }
+
+    article {
+      width: 75%;
+      float: right;
+      margin-top: 0;
+    }
+
+    .logo-container {
+      width: 75%;
+      float: right;
+    }
+
+    .form-wrap {
+      margin: 1em;
+    }
+
+    #content {
+      margin:1em;
+    }
+
+    }
+
+    @media (min-width: 50em) {
 
       body {
         background-position: 0 0;
+      }
+
+      article {
+        width: 55%;
+        display: block;
+      }
+
+      .logo-container {
+        width: 55%;
+        display: block;
       }
 
     }
@@ -97,7 +222,13 @@
   
     <header>
 
-      <center><img class="logo" src="http://d3n8a8pro7vhmx.cloudfront.net/themes/53fbd2bb01925b4aec000001/attachments/original/1458785191/Colour_transparent_white.png?1458785191"></center>
+    <div class="top-bar">
+
+    <a href="/home" class="donate">Donate</a>
+
+    </div>
+
+      <div class="logo-container"><center><img class="logo" src="http://d3n8a8pro7vhmx.cloudfront.net/themes/53fbd2bb01925b4aec000001/attachments/original/1458785191/Colour_transparent_white.png?1458785191"></center></div>
 
     </header>
 
@@ -108,127 +239,23 @@
 
 <div id="content">
 
-  {% if page.signup.content.size > 0 %}
-  <div id="intro" class="intro">
-    {{ page.signup.content }}
-  </div>
-  {% endif %}
+{% subpage "sign_up" with "splash_signup" %}
 
-  {% if page.show_social_slider? and page.public_activities_count > 0 %}
-  {% include "social_slider" %}
-  {% endif %}
+<a href="/home" class="skip">Skip to Shaun-Francis.com</a>
 
-  <div class="form-wrap">
-    <div class="form">
-
-      {% form_for signup %}
-
-       {% if request.sorta_logged_in? %}
-        <h4>Hi {{ request.current_signup.name_or_email }}, thanks for joining!</h4>
-
-      {% if request.logged_in? == false %}
-        <div class="padbottommore"><small>If you're not {{ request.current_signup.name_or_email }}, <a href="{{ request.current_signup.logout_url }}">click here to signup</a>.</small></div>
-      {% endif %}
-
-      {% endif %} 
-
-      <div class="form-errors">{% error_messages_for signup %}</div>
-
-         {% if request.sorta_logged_in? == false or request.current_signup.has_name? == false %}
-        <div class="row-fluid"> 
-          <div class="span6"><label for="signup_first_name">First Name</label>
-          {% text_field "first_name", class:"text" %}</div>
-          <div class="span6"><label for="signup_last_name">Last Name</label>
-          {% text_field "last_name", class:"text" %}</div>
-        </div>
-         {% endif %} 
-
-         {% if request.sorta_logged_in? == false or request.current_signup.has_mobile? == false %} 
-        <div class="row-fluid">
-          <div class="span6"><label for="signup_email">Email</label>
-          {% email_field "email", class:"text" %}</div>
-          {% if site.ask_for_mobiles? %}
-          <div class="span6"><label for="signup_mobile_number">Mobile phone</label>
-          {% phone_field "mobile_number", class:"text" %}</div>
-          {% endif %}
-        </div>
-
-
-        <div class="row-fluid">
-          <div class="span6"><label class="checkbox" for="signup_email_opt_in">{% check_box "email_opt_in", class:"checkbox" %} Send me email updates</label></div>
-          {% if site.ask_for_mobiles? %}
-          <div class="span6"><label class="checkbox" for="signup_mobile_opt_in">{% check_box "mobile_opt_in", class:"checkbox" %} Send me text message updates</label></div>
-          {% endif %}
-        </div>
-         {% endif %} 
-
-      {% if page.signup.is_phone? %}
-      <div class="row-fluid">
-        <div class="span12"><label for="signup_phone_number">Phone</label>{% phone_field "phone_number", class:"text" %}</div>
-      </div>
-      {% endif %}
-
-      {% if page.signup.is_address? %}
-
-      {% if request.sorta_logged_in? == false or request.current_signup.has_full_address? == false %}
-      <div class="row-fluid">
-        <div class="span12"><label for="signup_submitted_address">Address (Street, City, State, Postal code)</label>{% text_field "submitted_address", class:"text" %}</div>
-      </div>
-      <div class="row-fluid">
-        <div class="span12"><label for="signup_country_code">Country</label>{% collection_select "country_code", page.signup.countries, "code", "name", class:"select" %}</div>
-      </div>
-      {% endif %}
-
-      {% endif %}
-
-      {% if page.signup.has_labeled_tags? %}
-        {% include "labeled_tags" %}
-      {% endif %}
-
-      {% if page.signup.is_volunteers? and site.ask_for_volunteers? %}
-      {% if request.sorta_logged_in? == false or request.current_signup.is_volunteer == false %}
-      <div class="row-fluid">
-        <div class="span12"><label class="checkbox" for="signup_is_volunteer">{% check_box "is_volunteer", class:"checkbox" %} I want to volunteer</label></div>
-      </div>
-
-      {% endif %}
-      {% endif %}
-
-      <div class="row-fluid">
-        <div class="span12"><label for="signup_activity_is_private" class="checkbox">{% check_box "activity_is_private", class:"checkbox" %} Don't publish this on the website</label></div>
-      </div>
-
-      <input class="submit-button" type="submit" name="commit" value="Sign Up">
-      <div class="form-submit"></div>
-
-      {% endform_for %}
-
-      {% if page.text_keyword_instructions.size > 0 %}
-      <div class="row-fluid padbottom padtopmore">
-        <div class="span12">
-        or {{ page.text_keyword_instructions }}
-        </div>
-      </div>
-      {% endif %}
-
-
-    </div>
-  </div>
 </div>
 
-  {% if page.tags_count > 0 %}
-  <div id="page-tags" class="page-tags">
-    {% include "page_tags" with page %}
-  </div>
-  {% endif %}
+<center><p class="authorization">Paid for by Shaun Francis for New York</p></center>
 
 
 
     </article>
 
-      <footer>
+      <!-- <footer>
 
-      </footer>
+      <a href="/home" class="donate">Donate</a>
+
+      </footer> -->
 
   </body>
 
